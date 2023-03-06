@@ -13,9 +13,13 @@ public:
     Materie() {
         //std::cout << "constr implicit materie\n";
     }
-    Materie(const Materie& other) : nume(other.nume) {
+    /*Materie(const Materie& other) : nume(other.nume) {
         std::cout << "constr de copiere materie\n";
-    }
+    }*/
+    /*Materie& operator=(const Materie& other) {
+        nume = other.nume;
+        return *this;
+    }*/
     friend std::ostream& operator<<(std::ostream& os, const Materie& mat) {
         os << "{ Nume: " << std::quoted(mat.nume) << "}\n";
         return os;
@@ -24,14 +28,14 @@ public:
 
 class Student {
     std::string nume;// = "test";
-    int grupa;// = 100;
+    int grupa = 100;
     std::vector<Materie> materii;
 public:
     Student() {
         std::cout << "constr implicit student\n";
     }
-    Student(std::string nume_, int grupa_, const std::vector<Materie>& materii_) :
-            nume{nume_}, grupa(grupa_), materii(materii_) {
+    Student(const std::string& nume_, int grupa_, const std::vector<Materie>& materii_) :
+    nume{nume_}, grupa(grupa_), materii(materii_) {
 //        nume = nume_;
 //        grupa = grupa_;
 //        materii = materii_;
@@ -109,7 +113,7 @@ int main() {
     f(st8);
     Student s10{g()};
     std::cout << "dupa apel g\n";
-    int a;
+    // int a;
     st1 = st2;
 //    st6();
 //    st1.nume = "test 2";
