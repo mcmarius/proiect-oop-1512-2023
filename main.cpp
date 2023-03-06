@@ -26,7 +26,38 @@ public:
     }
 };
 
+class Facultate {
+    std::string nume = "FMI";
+    std::string specializare = "Master AI";
+    int ani = 2;
+public:
+    Facultate(const std::string &nume, const std::string &specializare, int ani) : nume(nume),
+                                                                                   specializare(specializare),
+                                                                                   ani(ani) {}
+
+    Facultate(const Facultate& other) : nume(other.nume), specializare(other.specializare), ani(other.ani) {
+        std::cout << "constr de copiere facultate\n";
+    }
+    Facultate& operator=(const Facultate& other) {
+        std::cout << "op= facultate\n";
+        nume = other.nume;
+        specializare = other.specializare;
+        ani = other.ani;
+        return *this;
+    }
+
+    ~Facultate() {
+        std::cout << "destr facultate\n";
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Facultate &facultate) {
+        os << "nume: " << facultate.nume << " specializare: " << facultate.specializare << " ani: " << facultate.ani;
+        return os;
+    }
+};
+
 class Student {
+    Facultate facultate{"FMI", "Info", 3};
     std::string nume;// = "test";
     int grupa = 100;
     std::vector<Materie> materii;
@@ -61,7 +92,15 @@ public:
         os << "op<< fără friend: " << this->grupa << " " << this->nume << "\n";
         return os;
     }
-    friend std::ostream& operator<<(std::ostream& os, const Student& st);
+//    friend std::ostream& operator<<(std::ostream& os, const Student& st);
+    friend std::ostream &operator<<(std::ostream &os, const Student &student) {
+        os << "facultate: " << student.facultate << " nume: " << student.nume << " grupa: " << student.grupa
+           << "\nMaterii:\n";
+        for(const auto& materie : student.materii)
+            os << "\t" << materie;
+        return os;
+    }
+
     void setGrupa(int grupa_) {
         grupa = grupa_;
     }
@@ -69,14 +108,14 @@ public:
     int getGrupa() { return grupa; }
 };
 
-std::ostream &operator<<(std::ostream &os, const Student &st) {
-    os << "Nume: " << st.nume << ", grupa: " << st.grupa << "\n";
-    os << "Materii:\n";
-    for(const auto& materie : st.materii)
-        os << "\tMaterie: " << materie;
-    os << "\n";
-    return os;
-}
+//std::ostream &operator<<(std::ostream &os, const Student &st) {
+//    os << "Nume: " << st.nume << ", grupa: " << st.grupa << "\n";
+//    os << "Materii:\n";
+//    for(const auto& materie : st.materii)
+//        os << "\tMaterie: " << materie;
+//    os << "\n";
+//    return os;
+//}
 
 
 void f(Student st) {
