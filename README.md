@@ -13,7 +13,7 @@
 - [ ] pentru o clasă: constructor de copiere, `operator=` de copiere, destructor
 <!-- - [ ] pentru o altă clasă: constructor de mutare, `operator=` de mutare, destructor -->
 <!-- - [ ] pentru o altă clasă: toate cele 5 funcții membru speciale -->
-- [ ] `operator<<` pentru toate clasele pentru afișare (std::ostream)
+- [ ] `operator<<` pentru toate clasele
 - [ ] cât mai multe `const` (unde este cazul)
 - [ ] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese
 - [ ] scenariu de utilizare a claselor definite:
@@ -54,4 +54,5 @@
 
 ## Resurse
 
+- [SFML](https://github.com/SFML/SFML/tree/aa82ea132b9296a31922772027ad5d14c1fa381b) (Zlib)
 - adăugați trimiteri către resursele externe care v-au ajutat sau pe care le-ați folosit

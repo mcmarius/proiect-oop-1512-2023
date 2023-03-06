@@ -2,6 +2,11 @@
 #include <vector>
 #include <iomanip>
 
+#ifdef __linux__
+#include <X11/Xlib.h>
+#endif
+
+
 class Materie {
     std::string nume = "OOP";
 public:
@@ -26,7 +31,7 @@ public:
         std::cout << "constr implicit student\n";
     }
     Student(std::string nume_, int grupa_, const std::vector<Materie>& materii_) :
-    nume{nume_}, grupa(grupa_), materii(materii_) {
+            nume{nume_}, grupa(grupa_), materii(materii_) {
 //        nume = nume_;
 //        grupa = grupa_;
 //        materii = materii_;
@@ -80,6 +85,10 @@ Student g() {
     return tmp; }
 
 int main() {
+#ifdef __linux__
+    XInitThreads();
+#endif
+
     Student st1, st2{}, st3{st2}, st4(st3), st5 = st1;//, st6();
     Student st7{"test 7", 123, {}};
     Student st8{"test 8", 124, {Materie{}, Materie{}, Materie{}}}, st9{st8};
