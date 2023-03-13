@@ -13,7 +13,7 @@ public:
     Sala& operator=(const Sala& other) = default;
     ~Sala() = default;
 
-    friend std::ostream &operator<<(std::ostream &os, const Sala &sala) {
+    friend std::ostream &operator<<(std::ostream &os, const Sala &) {
         return os;
     }
 };
@@ -21,7 +21,7 @@ public:
 class Etaj {
     std::vector<Sala> sali;
     //Sala sala;
-    int nr;
+    int nr = 1;
 public:
 //    Etaj(const std::vector<Sala> &sala, int nr) : sala(sala), nr(nr) {}
     friend std::ostream &operator<<(std::ostream &os, const Etaj &etaj) {
