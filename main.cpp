@@ -6,6 +6,33 @@
 #include <X11/Xlib.h>
 #endif
 
+class Sala {
+public:
+    Sala() = default;
+    Sala(const Sala& other) = default;
+    Sala& operator=(const Sala& other) = default;
+    ~Sala() = default;
+
+    friend std::ostream &operator<<(std::ostream &os, const Sala &sala) {
+        return os;
+    }
+};
+
+class Etaj {
+    std::vector<Sala> sali;
+    //Sala sala;
+    int nr;
+public:
+//    Etaj(const std::vector<Sala> &sala, int nr) : sala(sala), nr(nr) {}
+    friend std::ostream &operator<<(std::ostream &os, const Etaj &etaj) {
+        os << "sali:";
+        for(const auto& sala : etaj.sali)
+            os << sala;
+        os << " nr: " << etaj.nr;
+        return os;
+    }
+
+};
 
 class Materie {
     std::string nume = "OOP";
@@ -132,12 +159,20 @@ int main() {
     XInitThreads();
 #endif
 
+
+    Etaj et;
+    std::vector<Etaj> etaje;
+    etaje.push_back(et);
     Student st1, st2{}, st3{st2}, st4(st3), st5 = st1;//, st6();
     Student st7{"test 7", 123, {}};
     Student st8{"test 8", 124, {Materie{}, Materie{}, Materie{}}}, st9{st8};
     std::cout << st8;
     st8.operator<<(std::cout);
     st8 << std::cout;
+
+    int x;
+    std::cin >> x;
+
     std::cout << "------------- st7 -------------\n";
     std::cout << st7.getNume() << " " << st7.getGrupa() << "\n";
     std::cout << "-------------- st8 ------------\n";
