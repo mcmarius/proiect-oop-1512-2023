@@ -4,136 +4,16 @@
 
 #ifdef __linux__
 #include <X11/Xlib.h>
+#include "Sala.h"
+#include "Student.h"
+#include "Etaj.h"
+
 #endif
 
-class Sala {
-public:
-    Sala() = default;
-    Sala(const Sala& other) = default;
-    Sala& operator=(const Sala& other) = default;
-    ~Sala() = default;
 
-    friend std::ostream &operator<<(std::ostream &os, const Sala &) {
-        return os;
-    }
-};
 
-class Etaj {
-    std::vector<Sala> sali;
-    //Sala sala;
-    int nr = 1;
-public:
-//    Etaj(const std::vector<Sala> &sala, int nr) : sala(sala), nr(nr) {}
-    friend std::ostream &operator<<(std::ostream &os, const Etaj &etaj) {
-        os << "sali:";
-        for(const auto& sala : etaj.sali)
-            os << sala;
-        os << " nr: " << etaj.nr;
-        return os;
-    }
 
-};
 
-class Materie {
-    std::string nume = "OOP";
-public:
-    Materie() {
-        //std::cout << "constr implicit materie\n";
-    }
-    /*Materie(const Materie& other) : nume(other.nume) {
-        std::cout << "constr de copiere materie\n";
-    }*/
-    /*Materie& operator=(const Materie& other) {
-        nume = other.nume;
-        return *this;
-    }*/
-    friend std::ostream& operator<<(std::ostream& os, const Materie& mat) {
-        os << "{ Nume: " << std::quoted(mat.nume) << "}\n";
-        return os;
-    }
-};
-
-class Facultate {
-    std::string nume = "FMI";
-    std::string specializare = "Master AI";
-    int ani = 2;
-public:
-    Facultate(const std::string &nume, const std::string &specializare, int ani) : nume(nume),
-                                                                                   specializare(specializare),
-                                                                                   ani(ani) {}
-
-    Facultate(const Facultate& other) : nume(other.nume), specializare(other.specializare), ani(other.ani) {
-        std::cout << "constr de copiere facultate\n";
-    }
-    Facultate& operator=(const Facultate& other) {
-        std::cout << "op= facultate\n";
-        nume = other.nume;
-        specializare = other.specializare;
-        ani = other.ani;
-        return *this;
-    }
-
-    ~Facultate() {
-        std::cout << "destr facultate\n";
-    }
-
-    friend std::ostream &operator<<(std::ostream &os, const Facultate &facultate) {
-        os << "nume: " << facultate.nume << " specializare: " << facultate.specializare << " ani: " << facultate.ani;
-        return os;
-    }
-};
-
-class Student {
-    Facultate facultate{"FMI", "Info", 3};
-    std::string nume;// = "test";
-    int grupa = 100;
-    std::vector<Materie> materii;
-public:
-    Student() {
-        std::cout << "constr implicit student\n";
-    }
-    Student(const std::string& nume_, int grupa_, const std::vector<Materie>& materii_) :
-    nume{nume_}, grupa(grupa_), materii(materii_) {
-//        nume = nume_;
-//        grupa = grupa_;
-//        materii = materii_;
-        std::cout << "constr de inițializare student\n";
-    }
-    Student(const Student& other) : nume(other.nume), grupa(other.grupa), materii(other.materii) {
-//        nume = other.nume;
-//        grupa = other.grupa;
-//        materii = other.materii;
-        std::cout << "constr de copiere student\n";
-    }
-    Student& operator=(const Student& other) {
-        nume = other.nume;
-        grupa = other.grupa;
-        materii = other.materii;
-        std::cout << "operator= student\n";
-        return *this;
-    }
-    ~Student() {
-        std::cout << "destr student\n";
-    }
-    std::ostream& operator<<(std::ostream& os) {
-        os << "op<< fără friend: " << this->grupa << " " << this->nume << "\n";
-        return os;
-    }
-//    friend std::ostream& operator<<(std::ostream& os, const Student& st);
-    friend std::ostream &operator<<(std::ostream &os, const Student &student) {
-        os << "facultate: " << student.facultate << " nume: " << student.nume << " grupa: " << student.grupa
-           << "\nMaterii:\n";
-        for(const auto& materie : student.materii)
-            os << "\t" << materie;
-        return os;
-    }
-
-    void setGrupa(int grupa_) {
-        grupa = grupa_;
-    }
-    std::string getNume() { return nume; }
-    int getGrupa() { return grupa; }
-};
 
 //std::ostream &operator<<(std::ostream &os, const Student &st) {
 //    os << "Nume: " << st.nume << ", grupa: " << st.grupa << "\n";
@@ -154,7 +34,18 @@ Student g() {
     std::cout << "g: " << tmp.getGrupa() << "\n";
     return tmp; }
 
+//
+
+class baza {
+   // derivata d;
+};
+
+class derivata : public baza {};
+
+
 int main() {
+    derivata d;
+    baza b{d};
 #ifdef __linux__
     XInitThreads();
 #endif
